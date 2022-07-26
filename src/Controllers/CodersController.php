@@ -21,6 +21,16 @@
                 $this->store($_POST);
                 return;
             }
+
+            if (isset($_GET["action"]) && ($_GET["action"] == "edit") ) {
+                $this->edit($_GET["id"]);
+                return;
+            }
+
+            if (isset($_GET["action"]) && ($_GET["action"] == "update") ) {
+                $this->update($_POST,$_GET["id"]);
+                return;
+            }
             
             $this->index();
         }
@@ -45,6 +55,20 @@
         public function store(array $request){
             $newCoder = new Coders(null,$request['coder'],$request['issue'],null);
             $newCoder->saveCoder();
+            $this->index();
+        }
+
+        public function edit($id){
+            $coderHelper = new Coders();
+            $coder = $coderHelper->findById($id);
+            new View("editCoder",["coder"=>$coder]);
+        }
+
+        public function update(array $request,$id){
+            $coderHelper = new Coders();
+            $coder = $coderHelper->findById($id);
+            $coder->rename($request["coder"],$request["issue"]);
+            $coder->update();
             $this->index();
         }
 

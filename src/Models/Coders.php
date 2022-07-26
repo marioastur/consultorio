@@ -43,7 +43,6 @@
                 
                 array_push($coderList, $coderItem);
             }
-
             return $coderList;
         }
 
@@ -75,9 +74,15 @@
 
         public function saveCoder(){
             $this->database->mysql->query("INSERT INTO {$this->table} ('coder','issus') values ($this->coder,$this->issue)");
-
         }
 
-    }
+        public function rename($coder,$issue){
+            $this->coder = $coder;
+            $this->issue = $issue;
+        }
 
+        public function update(){
+            $this->database->mysql->query("UPDATE {$this->table} SET 'coder' = {$this->coder}, 'issus' = {$this->issue} WHERE id={$this->id}");
+        }
+    }
 ?>

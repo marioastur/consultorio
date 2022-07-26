@@ -17,6 +17,7 @@
                 echo ($coder->getIssue().' - ');
                 echo ($coder->getDate_time().' - ');
                 echo ("<a href='?action=delete&id={$coder->getId()}'><i class='lnr lnr-trash'></i> </a><br>");
+                echo ("<a href='?action=edit&id={$coder->getId()}'><i class='lnr lnr-trash'></i>Edit</a><br>");
             }
         ?>
 
